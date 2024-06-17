@@ -1,0 +1,83 @@
+.holder {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background-color: #f8f9fa;
+    padding: 20px;
+    max-width: 90%;
+    min-height: 100%;
+    & .post-detail {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        background-color: #ffffff;
+        padding: 20px;
+        width: 100%;
+        max-width: 800px;
+        &__title {
+            margin-bottom: 20px;
+            color: #343a40;
+            font-weight: 700;
+            font-size: 2rem;
+            text-align: center;
+        }
+        &__body {
+            margin-bottom: 20px;
+        }
+        &__item {
+            display: flex;
+            margin-bottom: 10px;
+        }
+        &__label {
+            width: 100px;
+            color: #495057;
+            font-weight: 600;
+        }
+        &__value {
+            color: #212529;
+            font-weight: 400;
+        }
+        &__tag {
+            margin-right: 5px;
+            border-radius: 5px;
+            background-color: #e9ecef;
+            padding: 2px 8px;
+            color: #495057;
+        }
+        &__actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        &__form-edit {
+            display: inline-block;
+        }
+        &__button-edit {
+            transition: background-color 0.3s;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            padding: 10px 20px;
+            color: #ffffff;
+            &:hover {
+                background-color: #0056b3;
+            }
+        }
+        &__form-delete {
+            display: inline-block;
+        }
+        &__button-delete {
+            transition: background-color 0.3s;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #dc3545;
+            padding: 10px 20px;
+            color: #ffffff;
+            &:hover {
+                background-color: #c82333;
+            }
+        }
+    }
+}
