@@ -28,15 +28,15 @@
                 </div>
                 <div class="create-post__field">
                     <label for="category" class="create-post__label">Category:</label>
-                    <select name="category" id="category" class="create-post__input">
+                    <select name="category_id" id="category" class="create-post__input">
                         <option value="">Select a category</option>
                         @foreach ($categories as $category)
-                            <option {{ old('category') == $category->id ? 'selected' : '' }} value="{{ $category->id }}">
+                            <option {{ old('category_id') == $category->id ? 'selected' : '' }} value="{{ $category->id }}">
                                 {{ $category->title }}</option>
                         @endforeach
                     </select>
-                    @error('category')
-                        <p class="create-post__error">{{ $message }}</p>
+                    @error('category_id')
+                        <p class="create-post__error">The category field is required.</p>
                     @enderror
                 </div>
                 <div class="create-post__field">

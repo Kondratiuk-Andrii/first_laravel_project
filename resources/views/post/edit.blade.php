@@ -40,7 +40,7 @@
                 </div>
                 <div class="edit-post__field">
                     <label class="edit-post__label" for="category">Category</label>
-                    <select class="edit-post__select" name="category" id="category">
+                    <select class="edit-post__select" name="category_id" id="category">
                         @foreach ($categories as $category)
                             <option value="{{ $category->id }}"
                                 {{ $post->category_id == $category->id ? 'selected' : '' }}>
@@ -48,8 +48,8 @@
                             </option>
                         @endforeach
                     </select>
-                    @error('category')
-                        <p class="create-post__error">{{ $message }}</p>
+                    @error('category_id')
+                        <p class="create-post__error">The category field is required</p>
                     @enderror
                 </div>
                 <div class="edit-post__field">
