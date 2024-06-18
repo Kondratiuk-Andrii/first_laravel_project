@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Post;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Post\IndexRequest;
 use App\Models\Category;
-use Illuminate\Http\Request;
 use App\Models\Post;
 
 class IndexController extends Controller
 {
-    public function __invoke(Request $request)
+    public function __invoke(IndexRequest $request)
     {
         $categories = Category::all();
         $category = $request->input('category');
