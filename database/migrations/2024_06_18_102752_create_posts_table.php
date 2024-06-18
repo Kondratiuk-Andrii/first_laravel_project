@@ -21,7 +21,7 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->unsignedBigInteger('category_id');
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
         });
     }
 
