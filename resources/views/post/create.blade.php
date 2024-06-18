@@ -8,24 +8,36 @@
                 @csrf
                 <div class="create-post__field">
                     <label for="title" class="create-post__label">Title:</label>
-                    <input class="create-post__input" type="text" name="title" id="title" placeholder="Title">
+                    <input class="create-post__input" type="text" name="title" id="title" placeholder="Title"
+                        value="{{ old('title') }}">
+                    @error('title')
+                        <p class="create-post__error">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div class="create-post__field">
                     <label class="create-post__label" for="content">Content:</label>
-                    <textarea name="content" id="content" placeholder="Content" class="create-post__textarea"></textarea>
+                    <textarea name="content" id="content" placeholder="Content" class="create-post__textarea">{{ old('content') }}</textarea>
+                    @error('content')
+                        <p class="create-post__error">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div class="create-post__field">
                     <label for="image" class="create-post__label">Image:</label>
-                    <input class="create-post__input" type="text" name="image" id="image" placeholder="Image">
+                    <input class="create-post__input" type="text" name="image" id="image" placeholder="Image"
+                        value="{{ old('image') }}">
                 </div>
                 <div class="create-post__field">
                     <label for="category" class="create-post__label">Category:</label>
-                    <select name="category_id" id="category" class="create-post__input">
+                    <select name="category" id="category" class="create-post__input">
                         <option value="">Select a category</option>
                         @foreach ($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->title }}</option>
+                            <option {{ old('category') == $category->id ? 'selected' : '' }} value="{{ $category->id }}">
+                                {{ $category->title }}</option>
                         @endforeach
                     </select>
+                    @error('category')
+                        <p class="create-post__error">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div class="create-post__field">
                     <label class="create-post__label" for="tags">Tags:</label>

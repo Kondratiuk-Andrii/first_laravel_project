@@ -10,10 +10,16 @@
                 <div class="edit-post__field">
                     <label for="title" class="edit-post__label">Title:</label>
                     <input class="edit-post__input" type="text" name="title" id="title" value="{{ $post->title }}">
+                    @error('title')
+                        <p class="create-post__error">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div class="edit-post__field">
                     <label class="edit-post__label" for="content">Content:</label>
                     <textarea name="content" id="content" class="edit-post__textarea" rows="5">{{ $post->content }}</textarea>
+                    @error('content')
+                        <p class="create-post__error">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div class="edit-post__field">
                     <label for="image" class="edit-post__label">Image:</label>
@@ -34,13 +40,17 @@
                 </div>
                 <div class="edit-post__field">
                     <label class="edit-post__label" for="category">Category</label>
-                    <select class="edit-post__select" name="category_id" id="category">
+                    <select class="edit-post__select" name="category" id="category">
                         @foreach ($categories as $category)
-                            <option value="{{ $category->id }}" {{ $post->category_id == $category->id ? 'selected' : '' }}>
+                            <option value="{{ $category->id }}"
+                                {{ $post->category_id == $category->id ? 'selected' : '' }}>
                                 {{ $category->title }}
                             </option>
                         @endforeach
                     </select>
+                    @error('category')
+                        <p class="create-post__error">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div class="edit-post__field">
                     <label class="edit-post__label" for="tags">Tags</label>

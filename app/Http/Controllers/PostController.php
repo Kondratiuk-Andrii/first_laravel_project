@@ -36,7 +36,7 @@ class PostController extends Controller
             'title' => 'required|string',
             'content' => 'required|string',
             'image' => 'nullable|string',
-            'category_id' => '',
+            'category' => 'required',
             'tags' => '',
         ]);
 
@@ -71,7 +71,7 @@ class PostController extends Controller
             'image' => 'nullable|string',
             'likes' => 'integer',
             'is_published' => 'boolean',
-            'category_id' => '',
+            'category' => '',
             'tags' => '',
         ]);
 
