@@ -14,12 +14,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Category::factory(5)->create();
-        $tags = Tag::factory(10)->create();
-        $posts = Post::factory(50)->create();
+        Category::factory(10)->create();
+        $tags = Tag::factory(20)->create();
+        $posts = Post::factory(200)->create();
 
         foreach ($posts as $post) {
-            $tagsIds = $tags->random(5)->pluck('id')->toArray();
+            $tagsIds = $tags->random(rand(0, 5))->pluck('id')->toArray();
             $post->tags()->attach($tagsIds);
         }
     }

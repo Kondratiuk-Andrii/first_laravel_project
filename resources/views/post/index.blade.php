@@ -48,6 +48,10 @@
                     </div>
                 @endforeach
             </div>
+            {{-- Pagination --}}
+            <div class="pagination-container">
+                {{ $posts->links('pagination') }}
+            </div>
         </div>
     </div>
 @endsection

@@ -40,7 +40,9 @@
     }
 
     & .content {
+        display: flex;
         flex: 0 0 70%;
+        flex-direction: column;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         background-color: #fff;
         padding: 20px;
@@ -76,6 +78,9 @@
                     margin-bottom: 5px;
                 }
                 &__tags {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+                    gap: 5px;
                     margin-top: 5px;
                     & .tag {
                         margin-right: 5px;
@@ -84,9 +89,16 @@
                         padding: 3px 8px;
                         color: #fff;
                         font-size: 0.8rem;
+                        text-align: center;
                     }
                 }
             }
+        }
+
+        & .pagination {
+            display: flex;
+            max-width: toRem(10);
+            max-height: toRem(10);
         }
     }
 }

@@ -9,9 +9,9 @@ class Service
     public function index($category = null)
     {
         if ($category) {
-            return Post::where('category_id', $category)->get();
+            return Post::where('category_id', $category)->paginate(20);
         } else {
-            return Post::all();
+            return Post::paginate(20);
         }
     }
     public function store($data)
@@ -32,7 +32,8 @@ class Service
         $post->tags()->sync($tags);
     }
 
-    public function destroy($post){
+    public function destroy($post)
+    {
         $post->delete();
     }
 }
