@@ -9,7 +9,13 @@
                 <i class="nav-icon fas fa-align-justify"></i>
                 <p>
                     Posts
-                    <span class="badge badge-info right">{{ $posts->total() }}</span>
+                    <span class="badge badge-info right">
+                        @if(request()->routeIs('admin.post.index'))
+                            {{ $posts->total() }}
+                        @else
+                            {{ $posts->count() }}
+                        @endif
+                    </span>
                 </p>
             </a>
         </li>

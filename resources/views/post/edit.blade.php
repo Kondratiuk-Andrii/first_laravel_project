@@ -1,72 +1,71 @@
-@extends('layouts.main')
+@extends('layouts.app')
 
 @section('content')
-    <div class="holder">
-        <div class="edit-post">
-            <h1 class="edit-post__title">Edit a Post #{{ $post->id }}</h1>
-            <form action="{{ route('post.update', $post->id) }}" method="POST" class="edit-post__form">
-                @csrf
-                @method('PUT')
-                <div class="edit-post__field">
-                    <label for="title" class="edit-post__label">Title:</label>
-                    <input class="edit-post__input" type="text" name="title" id="title" value="{{ $post->title }}">
-                    @error('title')
-                        <p class="create-post__error">{{ $message }}</p>
-                    @enderror
-                </div>
-                <div class="edit-post__field">
-                    <label class="edit-post__label" for="content">Content:</label>
-                    <textarea name="content" id="content" class="edit-post__textarea" rows="5">{{ $post->content }}</textarea>
-                    @error('content')
-                        <p class="create-post__error">{{ $message }}</p>
-                    @enderror
-                </div>
-                <div class="edit-post__field">
-                    <label for="image" class="edit-post__label">Image:</label>
-                    <input class="edit-post__input" type="text" name="image" id="image"
-                        value="{{ $post->image }}">
-                </div>
-                <div class="edit-post__field">
-                    <label for="likes" class="edit-post__label">Likes:</label>
-                    <input class="edit-post__input" type="number" name="likes" id="likes" value="{{ $post->likes }}"
-                        min="0">
-                </div>
-                <div class="edit-post__field">
-                    <label class="edit-post__label" for="is_published">Published</label>
-                    <select class="edit-post__select" name="is_published" id="is_published">
-                        <option value="1" {{ $post->is_published ? 'selected' : '' }}>Yes</option>
-                        <option value="0" {{ !$post->is_published ? 'selected' : '' }}>No</option>
-                    </select>
-                </div>
-                <div class="edit-post__field">
-                    <label class="edit-post__label" for="category">Category</label>
-                    <select class="edit-post__select" name="category_id" id="category">
-                        @foreach ($categories as $category)
-                            <option value="{{ $category->id }}"
-                                {{ $post->category_id == $category->id ? 'selected' : '' }}>
-                                {{ $category->title }}
-                            </option>
-                        @endforeach
-                    </select>
-                    @error('category_id')
-                        <p class="create-post__error">The category field is required</p>
-                    @enderror
-                </div>
-                <div class="edit-post__field">
-                    <label class="edit-post__label" for="tags">Tags</label>
-                    <div class="edit-post__tags">
-                        @foreach ($tags as $tag)
-                            <div class="edit-post__tag">
-                                <input type="checkbox" name="tags[]" value="{{ $tag->id }}"
-                                    id="tag_{{ $tag->id }}"
-                                    {{ in_array($tag->id, $post->tags->pluck('id')->toArray()) ? 'checked' : '' }}>
-                                <label for="tag_{{ $tag->id }}">{{ $tag->title }}</label>
-                            </div>
-                        @endforeach
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h1>Edit a Post #{{ $post->id }}</h1>
+            </div>
+            <div class="card-body">
+                <form action="{{ route('post.update', $post->id) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title:</label>
+                        <input type="text" name="title" id="title" class="form-control" value="{{ $post->title }}">
+                        @error('title')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
-                </div>
-                <button type="submit" class="edit-post__button">Save Changes</button>
-            </form>
+                    <div class="mb-3">
+                        <label for="content" class="form-label">Content:</label>
+                        <textarea name="content" id="content" class="form-control" rows="5">{{ $post->content }}</textarea>
+                        @error('content')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Image:</label>
+                        <input type="text" name="image" id="image" class="form-control" value="{{ $post->image }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="likes" class="form-label">Likes:</label>
+                        <input type="number" name="likes" id="likes" class="form-control" value="{{ $post->likes }}" min="0">
+                    </div>
+                    <div class="mb-3">
+                        <label for="is_published" class="form-label">Published</label>
+                        <select name="is_published" id="is_published" class="form-select">
+                            <option value="1" {{ $post->is_published ? 'selected' : '' }}>Yes</option>
+                            <option value="0" {{ !$post->is_published ? 'selected' : '' }}>No</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="category" class="form-label">Category</label>
+                        <select name="category_id" id="category" class="form-select">
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}" {{ $post->category_id == $category->id ? 'selected' : '' }}>
+                                    {{ $category->title }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('category_id')
+                            <div class="text-danger">The category field is required</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="tags" class="form-label">Tags</label>
+                        <div>
+                            @foreach ($tags as $tag)
+                                <div class="form-check form-check-inline">
+                                    <input type="checkbox" name="tags[]" id="tag_{{ $tag->id }}" class="form-check-input" value="{{ $tag->id }}" {{ in_array($tag->id, $post->tags->pluck('id')->toArray()) ? 'checked' : '' }}>
+                                    <label for="tag_{{ $tag->id }}" class="form-check-label">{{ $tag->title }}</label>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success">Save Changes</button>
+                </form>
+            </div>
         </div>
     </div>
 @endsection

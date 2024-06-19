@@ -1,58 +1,65 @@
-@extends('layouts.main')
+@extends('layouts.app')
 
 @section('content')
-    <div class="holder">
-        <div class="create-post">
-            <h1 class="create-post__title">Create a new Post</h1>
-            <form action="{{ route('post.store') }}" method="POST" class="create-post__form">
-                @csrf
-                <div class="create-post__field">
-                    <label for="title" class="create-post__label">Title:</label>
-                    <input class="create-post__input" type="text" name="title" id="title" placeholder="Title"
-                        value="{{ old('title') }}">
-                    @error('title')
-                        <p class="create-post__error">{{ $message }}</p>
-                    @enderror
-                </div>
-                <div class="create-post__field">
-                    <label class="create-post__label" for="content">Content:</label>
-                    <textarea name="content" id="content" placeholder="Content" class="create-post__textarea">{{ old('content') }}</textarea>
-                    @error('content')
-                        <p class="create-post__error">{{ $message }}</p>
-                    @enderror
-                </div>
-                <div class="create-post__field">
-                    <label for="image" class="create-post__label">Image:</label>
-                    <input class="create-post__input" type="text" name="image" id="image" placeholder="Image"
-                        value="{{ old('image') }}">
-                </div>
-                <div class="create-post__field">
-                    <label for="category" class="create-post__label">Category:</label>
-                    <select name="category_id" id="category" class="create-post__input">
-                        <option value="">Select a category</option>
-                        @foreach ($categories as $category)
-                            <option {{ old('category_id') == $category->id ? 'selected' : '' }} value="{{ $category->id }}">
-                                {{ $category->title }}</option>
-                        @endforeach
-                    </select>
-                    @error('category_id')
-                        <p class="create-post__error">The category field is required.</p>
-                    @enderror
-                </div>
-                <div class="create-post__field">
-                    <label class="create-post__label" for="tags">Tags:</label>
-                    <div class="create-post__tags">
-                        @foreach ($tags as $tag)
-                            <div class="create-post__tag">
-                                <input type="checkbox" name="tags[]" id="tag_{{ $tag->id }}"
-                                    value="{{ $tag->id }}">
-                                <label for="tag_{{ $tag->id }}">{{ $tag->title }}</label>
-                            </div>
-                        @endforeach
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h1>Create a new Post</h1>
+            </div>
+            <div class="card-body">
+                <form action="{{ route('post.store') }}" method="POST">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title:</label>
+                        <input type="text" name="title" id="title" class="form-control" placeholder="Title"
+                               value="{{ old('title') }}">
+                        @error('title')
+                        <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
-                </div>
-                <button type="submit" class="create-post__button">Create Post</button>
-            </form>
+                    <div class="mb-3">
+                        <label for="content" class="form-label">Content:</label>
+                        <textarea name="content" id="content" class="form-control" placeholder="Content"
+                                  rows="5">{{ old('content') }}</textarea>
+                        @error('content')
+                        <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Image:</label>
+                        <input type="text" name="image" id="image" class="form-control" placeholder="Image"
+                               value="{{ old('image') }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="category" class="form-label">Category:</label>
+                        <select name="category_id" id="category" class="form-select">
+                            <option value="">Select a category</option>
+                            @foreach ($categories as $category)
+                                <option
+                                    value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                                    {{ $category->title }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('category_id')
+                        <div class="text-danger">The category field is required</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="tags" class="form-label">Tags:</label>
+                        <div>
+                            @foreach ($tags as $tag)
+                                <div class="form-check form-check-inline">
+                                    <input type="checkbox" name="tags[]" id="tag_{{ $tag->id }}"
+                                           class="form-check-input" value="{{ $tag->id }}">
+                                    <label for="tag_{{ $tag->id }}" class="form-check-label">{{ $tag->title }}</label>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success">Create Post</button>
+                </form>
+            </div>
         </div>
     </div>
 @endsection
