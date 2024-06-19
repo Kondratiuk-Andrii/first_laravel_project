@@ -7,6 +7,7 @@ use App\Http\Requests\Post\IndexRequest;
 
 use App\Models\Category;
 
+
 class IndexController extends BaseController
 {
     public function __invoke(IndexRequest $request)
