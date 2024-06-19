@@ -17,13 +17,16 @@ Route::group(['namespace' => 'App\Http\Controllers\Post'], function () {
     Route::delete('/posts/{post}', 'DestroyController')->name('post.destroy');
 });
 
-
-Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin'], function () {
-    Route::get('', 'IndexController')->name('admin.index');
-    Route::group(['namespace' => 'Post'], function () {
-        Route::get('/post', 'IndexController')->name('admin.post.index');
+Route::middleware([\App\Http\Middleware\AdminPanelMiddleware::class])->group(function () {
+    Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin'], function () {
+        Route::get('', 'IndexController')->name('admin.index');
+        Route::group(['namespace' => 'Post'], function () {
+            Route::get('/post', 'IndexController')->name('admin.post.index');
+        });
     });
 });
+
+
 
 
 
