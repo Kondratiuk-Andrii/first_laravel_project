@@ -22,7 +22,9 @@ class IndexRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'category' => 'nullable|integer|exists:categories,id',
+            'title' => 'nullable|string',
+            'content' => 'nullable|string',
+            'category_id' => '',
         ];
     }
 }

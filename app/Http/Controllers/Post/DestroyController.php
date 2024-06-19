@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Post;
 
-use App\Http\Controllers\Post\BaseController;
 use App\Models\Post;
 
 class DestroyController extends BaseController

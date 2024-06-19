@@ -10,14 +10,14 @@
                 <div class="categories__list">
                     <div class="categories__item ">
                         <a href="{{ route('post.index') }}"
-                            class="categories__link {{ !request()->has('category') ? 'active' : '' }}">
+                            class="categories__link {{ !request()->has('category_id') ? 'active' : '' }}">
                             All categories
                         </a>
                     </div>
                     @foreach ($categories as $category)
                         <div class="categories__item">
-                            <a href="{{ route('post.index', ['category' => $category->id]) }}"
-                                class="categories__link {{ request('category') == $category->id ? 'active' : '' }}">
+                            <a href="{{ route('post.index', ['category_id' => $category->id]) }}"
+                                class="categories__link {{ request('category_id') == $category->id ? 'active' : '' }}">
                                 {{ $category->title }}
                             </a>
                         </div>
@@ -50,7 +50,7 @@
             </div>
             {{-- Pagination --}}
             <div class="pagination-container">
-                {{ $posts->links('pagination') }}
+                {{ $posts->withQueryString()->links('pagination') }}
             </div>
         </div>
     </div>

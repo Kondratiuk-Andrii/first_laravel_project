@@ -2,18 +2,17 @@
 
 namespace App\Services\Post;
 
+use App\Http\Filters\PostFilter;
 use App\Models\Post;
 
 class Service
 {
-    public function index($category = null)
+    public function index($data)
     {
-        if ($category) {
-            return Post::where('category_id', $category)->paginate(20);
-        } else {
-            return Post::paginate(20);
-        }
+        $filter = app()->make(PostFilter::class, ['queryParams' => array_filter($data)]);
+        return Post::filter($filter)->paginate(20);
     }
+
     public function store($data)
     {
         $tags = $data['tags'] ?? [];
