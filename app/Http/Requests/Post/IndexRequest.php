@@ -25,6 +25,8 @@ class IndexRequest extends FormRequest
             'title' => 'nullable|string',
             'content' => 'nullable|string',
             'category_id' => '',
+            'page' => '',
+            'per_page' => '',
         ];
     }
 }

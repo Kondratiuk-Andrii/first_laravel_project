@@ -9,8 +9,11 @@ class Service
 {
     public function index($data)
     {
+        $page = $data['page'] ?? 1;
+        $perPage = $data['per_page'] ?? 10;
+
         $filter = app()->make(PostFilter::class, ['queryParams' => array_filter($data)]);
-        return Post::filter($filter)->paginate(20);
+        return Post::filter($filter)->paginate($perPage, ['*'], 'page', $page);
     }
 
     public function store($data)
@@ -20,6 +23,8 @@ class Service
 
         $post = Post::create($data);
         $post->tags()->attach($tags);
+
+        return $post;
     }
 
     public function update($post, $data)
@@ -29,6 +34,8 @@ class Service
 
         $post->update($data);
         $post->tags()->sync($tags);
+
+        return $post->fresh();
     }
 
     public function destroy($post)
