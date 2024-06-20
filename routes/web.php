@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\AdminPanelMiddleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -17,7 +18,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Post'], function () {
     Route::delete('/posts/{post}', 'DestroyController')->name('post.destroy');
 });
 
-Route::middleware([\App\Http\Middleware\AdminPanelMiddleware::class])->group(function () {
+Route::middleware([AdminPanelMiddleware::class])->group(function () {
     Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin'], function () {
         Route::get('', 'IndexController')->name('admin.index');
         Route::group(['namespace' => 'Post'], function () {
