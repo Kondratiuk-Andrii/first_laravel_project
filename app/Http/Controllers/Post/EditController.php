@@ -12,7 +12,7 @@ class EditController extends BaseController
     public function __invoke(Post $post)
     {
 
-        Gate::authorize('view', auth()->user());
+//        Gate::authorize('view', auth()->user());
 
         $categories = Category::all();
         $tags = Tag::all();
